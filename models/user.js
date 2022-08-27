@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema(
         address: {
             type: String
         },
+        verified: {
+            type: Boolean,
+            default: true
+        },
         active: {
             type: Boolean,
             default: true
