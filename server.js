@@ -23,10 +23,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', require('./routes/root'));
 app.use('/user', require('./routes/userRoutes'));
+app.use('/category', require('./routes/categoryRoutes'));
+app.use('/subcategory', require('./routes/subCategoryRoutes'));
 
 app.all('*', (req, res) => {
     res.status(404);
