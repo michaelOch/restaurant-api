@@ -69,11 +69,10 @@ const createNewUser = asyncHandler(async (req, res) => {
 // @route PATCH /user/:id
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
-    const { tel, address, active } = req.body;
-    const id = req?.params?.id;
+    const { id, tel, address, active, roles } = req.body;
 
     // Confirm data
-    if (!id || !tel || !address || typeof active !== 'boolean') {
+    if (!id || !roles.length || typeof active !== 'boolean') {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
@@ -91,9 +90,10 @@ const updateUser = asyncHandler(async (req, res) => {
     //     return res.status(409).json({ message: 'Duplicate username' });
     // }
 
-    user.tel = tel;
-    user.address = address;
+    user.tel = tel ? tel : '';
+    user.address = address ? address : '';
     user.active = active;
+    user.roles = roles;
 
     // if (password) {
     //     // Hash password
@@ -109,7 +109,7 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route DELETE /user/:id
 // @access Private
 const deleteUser = asyncHandler(async (req, res) => {
-    const id = req?.params?.id;
+    const { id } = req.body;
 
     if (!id) {
         return res.status(400).json({ message: 'User ID Required' });

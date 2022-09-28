@@ -26,6 +26,7 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', require('./routes/root'));
+app.use('/auth', require('./routes/authRoutes'))
 app.use('/user', require('./routes/userRoutes'));
 app.use('/category', require('./routes/categoryRoutes'));
 app.use('/subcategory', require('./routes/subCategoryRoutes'));
